@@ -61,41 +61,65 @@
               foreach($daftar_orang as $baris) {   
                    ?>
                      <tr>
-                        <th scope="row">1</th>
-                        <td><?php echo $baris->Nama ?></td>
-                        <td><?php echo $baris->Alamat?></td>
+                        <th scope="row"><?php echo $baris->id ?></th>
+                        <td><?php echo $baris->nama ?></td>
+                        <td><?php echo $baris->alamat?></td>
                         <td>
-                            <button class="btn btn-warning" type="submit">ubah</button>
-                            <button class="btn btn-info" type="submit">hapus</button>
+                            <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#ubahModal<?php echo $baris->id ?>">ubah</button>
+                            <a class="btn btn-info" href="welcome/hapusOrang/<?php echo $baris->id ?>" >hapus</a>
                         </td>
                       </tr>
-                   <?php
+
+                      <div class="modal fade" id="ubahModal<?php echo $baris->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">ORANG</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <form action="Welcome/ubahOrang"method="post">
+                                <div class="modal-body">
+                                  <input type="hidden" name="id" value="<?php echo $baris->id ?>">
+                                  <input type="text" name ="Nama" class="form-control" VALUE="<?php echo $baris->nama ?>">
+                                  <br>
+                                  <input type="text" name ="Alamat" class="form-control" VALUE="<?php echo $baris->alamat?>">
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>  
+                     <?php
               }  
-          ?>
+              ?>
         
      </tbody>
       </table>
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">ORANG</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">ORANG</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="Welcome/TambahOrang"method="post">
             <div class="modal-body">
-                <input type="text" name ="Nama" class="form-control">
-                <br>
-                <input type="text" name ="Alamat" class="form-control">
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
-              </div>
-            </form>
-          </div>
+              <input type="text" name ="Nama" class="form-control">
+              <br>
+              <input type="text" name ="Alamat" class="form-control">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+          </form>
         </div>
       </div>
+    </div>  
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
 </html>                                    

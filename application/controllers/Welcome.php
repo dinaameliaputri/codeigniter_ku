@@ -22,7 +22,7 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->model('Model_Orang');
 
-		$hasil = $this-> model_orang->AmbilData();
+		$hasil = $this-> Model_Orang->AmbilData();
 
 		$data = [
 			"daftar_orang" => $hasil
@@ -38,7 +38,29 @@ class Welcome extends CI_Controller {
         $nama = $this->input->post("Nama");
 		$Alamat = $this->input->post("Alamat");
 
-		$this->model_orang->ProsesTambahOrang($nama, $Alamat);
+		$this->Model_Orang->ProsesTambahOrang($nama, $Alamat);
+
+		redirect("Welcome");
+	}
+
+	public function hapusOrang($id) {
+		$this->load->model('Model_Orang');
+		$this->load->helper('url');
+
+		$this->Model_Orang->prosesHapusOrang($id);
+
+		redirect("Welcome");
+	}
+
+	public function ubahOrang() {
+		$this->load->model('Model_Orang');
+		$this->load->helper('url');
+
+		$id = $this->input->post("id");
+        $nama = $this->input->post("Nama");
+		$Alamat = $this->input->post("Alamat");
+
+		$this->Model_Orang->ProsesUbahOrang($id, $nama, $Alamat);
 
 		redirect("Welcome");
 	}
